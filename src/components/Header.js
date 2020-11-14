@@ -1,22 +1,11 @@
 import React from 'react';
-
-// new dependencies
-import { useQuery, gql } from '@apollo/client';
-
-// import both Link and withRouter from React Router
-import { Link, withRouter } from 'react-router-dom';
-// import the ButtonAsLink component
-import ButtonAsLink from './ButtonAsLink';
-
-// local query
-const IS_LOGGED_IN = gql`
-  {
-    isLoggedIn @client
-  }
-`;
-
 import styled from 'styled-components';
 import logo from '../img/logo.svg';
+import { useQuery } from '@apollo/client';
+import { Link, withRouter } from 'react-router-dom';
+
+import ButtonAsLink from './ButtonAsLink';
+import { IS_LOGGED_IN } from '../gql/query';
 
 const HeaderBar = styled.header`
   width: 100%;
@@ -41,16 +30,14 @@ const UserState = styled.div`
 `;
 
 const Header = props => {
-  // query hook for user logged-in state,
-  // including the client for referencing the Apollo store
+  // query hook for user logged in state
   const { data, client } = useQuery(IS_LOGGED_IN);
 
   return (
     <HeaderBar>
       <img src={logo} alt="Notedly Logo" height="40" />
       <LogoText>Notedly</LogoText>
-
-      {/* If logged in display a logout link, else display sign-in options */}
+      {/* If logged in display a log out link, else display sign in options */}
       <UserState>
         {data.isLoggedIn ? (
           <ButtonAsLink
@@ -61,7 +48,7 @@ const Header = props => {
               client.resetStore();
               // update local state
               client.writeData({ data: { isLoggedIn: false } });
-              // redirect the user to the home page
+              // redirect the user to the homepage
               props.history.push('/');
             }}
           >
@@ -78,5 +65,4 @@ const Header = props => {
   );
 };
 
-// we wrap our component in the withRouter higher-order component
 export default withRouter(Header);

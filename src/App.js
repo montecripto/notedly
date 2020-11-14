@@ -1,24 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-// import the Apollo dependencies
 import {
   ApolloClient,
   ApolloProvider,
   createHttpLink,
   InMemoryCache
 } from '@apollo/client';
-
 import { setContext } from 'apollo-link-context';
-import GlobalStyle from './components/GlobalStyle';
-import Pages from './pages';
+
+// import global styles
+import GlobalStyle from '/components/GlobalStyle';
+// import our routes
+import Pages from '/pages';
 
 // configure our API URI & cache
 const uri = process.env.API_URI;
 const httpLink = createHttpLink({ uri });
 const cache = new InMemoryCache();
 
-// check for a token and return the headers to the context
+// return the headers to the context
 const authLink = setContext((_, { headers }) => {
   return {
     headers: {
@@ -28,7 +28,7 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-// configure Apollo Client
+// create the Apollo client
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache,

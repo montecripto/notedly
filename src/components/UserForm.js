@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
 import Button from './Button';
 
 const Wrapper = styled.div`
@@ -15,6 +16,7 @@ const Form = styled.form`
     display: block;
     line-height: 2em;
   }
+
   input {
     width: 100%;
     margin-bottom: 1em;
@@ -39,10 +41,12 @@ const UserForm = props => {
       {props.formType === 'signup' ? <h2>Sign Up</h2> : <h2>Sign In</h2>}
       {/* perform the mutation when a user submits the form */}
       <Form
-        onSubmit={e => {
-          e.preventDefault();
+        onSubmit={event => {
+          event.preventDefault();
           props.action({
-            variables: { ...values }
+            variables: {
+              ...values
+            }
           });
         }}
       >
@@ -82,4 +86,5 @@ const UserForm = props => {
     </Wrapper>
   );
 };
+
 export default UserForm;

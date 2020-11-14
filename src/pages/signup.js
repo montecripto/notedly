@@ -1,31 +1,19 @@
-import React, { useEffect, useState } from 'react';
-
-import { useMutation, useApolloClient, gql } from '@apollo/client';
+import React, { useEffect } from 'react';
+import { useMutation, useApolloClient } from '@apollo/client';
 
 import UserForm from '../components/UserForm';
+import { SIGNUP_USER } from '../gql/mutation';
 
-const SIGNUP_USER = gql`
-  mutation signUp($email: String!, $username: String!, $password: String!) {
-    signUp(email: $email, username: $username, password: $password)
-  }
-`;
-
-// include the props passed to the component for later use
 const SignUp = props => {
   useEffect(() => {
     // update the document title
-    document.title = 'Sign Up — Notedly';
+    document.title = 'Sign Up — Notedly';
   });
 
-  // Apollo Client
   const client = useApolloClient();
-
-  //add the mutation hook
   const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
     onCompleted: data => {
-      // console.log the JSON Web Token when the mutation is complete
-      console.log(data.signUp);
-      // store the JWT in localStorage
+      // store the token
       localStorage.setItem('token', data.signUp);
       // update the local cache
       client.writeData({ data: { isLoggedIn: true } });
@@ -44,4 +32,5 @@ const SignUp = props => {
     </React.Fragment>
   );
 };
+
 export default SignUp;

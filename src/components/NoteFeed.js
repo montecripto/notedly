@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const NoteWrapper = styled.div`
   max-width: 800px;
@@ -15,7 +14,7 @@ import Note from './Note';
 
 const NoteFeed = ({ notes }) => {
   return (
-    <div>
+    <div className="note-feed">
       {notes.map(note => (
         <NoteWrapper key={note.id}>
           <Note note={note} />
@@ -25,4 +24,5 @@ const NoteFeed = ({ notes }) => {
     </div>
   );
 };
+
 export default NoteFeed;

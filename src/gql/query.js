@@ -36,7 +36,6 @@ const GET_NOTE = gql`
   }
 `;
 
-// add the GET_MY_NOTES query
 const GET_MY_NOTES = gql`
   query me {
     me {
@@ -57,7 +56,6 @@ const GET_MY_NOTES = gql`
   }
 `;
 
-// add the GET_MY_FAVORITES query
 const GET_MY_FAVORITES = gql`
   query me {
     me {
@@ -78,7 +76,6 @@ const GET_MY_FAVORITES = gql`
   }
 `;
 
-// add GET_ME to our queries
 const GET_ME = gql`
   query me {
     me {

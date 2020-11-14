@@ -2,9 +2,9 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
+import { GET_ME } from '../gql/query';
 import DeleteNote from './DeleteNote';
 import FavoriteNote from './FavoriteNote';
-import { GET_ME } from '../gql/query';
 
 const NoteUser = props => {
   const { loading, error, data } = useQuery(GET_ME);
